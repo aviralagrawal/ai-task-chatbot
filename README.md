@@ -64,5 +64,7 @@ one can say "Edit an existing task with id 1 with new name as Task 3 , due date 
 delete a task by saying "Delete a task with id 1".
 5. View the updated task list in real time on the dashboard.
 
-
+![Signup](./signup.jpg)
+![Signin](./signin.jpg)
+![Dashboard](./dashboard.jpg)
 
