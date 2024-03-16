@@ -3,7 +3,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
+
 const API_KEY = 'YOUR GEMINI KEY'
+
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
