@@ -36,12 +36,31 @@ This project is a task management system with an integrated chatbot user interfa
 1. Set up your MySQL database and configure the connection in the Spring Boot application properties.
 2. Run the Spring Boot application.
 
+### Docker Setup (Optional) In case you dont want to run backend and frontend separately you can directly follow the setup below only.
+
+1. Install Docker on your machine if you haven't already.
+2. Navigate to the project root directory.
+3. Build the Docker images for frontend and backend:
+
+   ```bash
+   docker build -t frontend-image frontend
+   docker build -t backend-image backend
+   ```
+4. Run the Docker containers using Docker Compose:
+    ```bash
+   docker-compose up
+    ```
+5. Access the application in your browser at http://localhost:3000
+
 ## Usage
 
 1. Open the application in your web browser.
-2. Create a new user. Log in with your credentials.
+2. Create a new user and then go back and Log in with your credentials.
 3. Use the chatbot interface to interact with the task management system.
-4. Create, edit, or delete tasks by providing natural language commands.
+4. Create, edit, or delete tasks by providing natural language commands. For example to create a task one 
+can say "Create a new task with name as Task 2, due date as 11th November, 2024 priority as 2.", or for editing
+one can say "Edit an existing task with id 1 with new name as Task 3 , due date as 18th Feb, 2022 priority as 1." or 
+delete a task by saying "Delete a task with id 1".
 5. View the updated task list in real time on the dashboard.
 
 
