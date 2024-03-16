@@ -27,6 +27,7 @@ This project is a task management system with an integrated chatbot user interfa
 1. Clone the repository to your local machine.
 2. Navigate to the `frontend` directory.
 3. Install dependencies using npm: `npm install`
+4. Add the gemini key in Dashboard.js
 4. Start the frontend server: `npm start`
 
 5. Access the application in your browser at `http://localhost:3000`.
