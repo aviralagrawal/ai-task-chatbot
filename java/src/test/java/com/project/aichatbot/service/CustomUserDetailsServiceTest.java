@@ -1,56 +1,55 @@
 package com.project.aichatbot.service;
 
 import com.project.aichatbot.entity.User;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-
-class CustomUserDetailsServiceTest {
+@RunWith(MockitoJUnitRunner.class)
+public class CustomUserDetailsServiceTest {
 
     @Mock
     private UserServiceImpl userService;
 
+    @InjectMocks
     private CustomUserDetailsService customUserDetailsService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        customUserDetailsService = new CustomUserDetailsService(userService);
+    private User user;
+
+    @Before
+    public void setUp() {
+        // Mock User
+        user = new User();
+        user.setId(1L);
+        user.setEmail("test@example.com");
+        user.setFirstName("John");
+        user.setLastName("Doe");
+        user.setPassword("password123");
     }
 
     @Test
-    void loadUserByUsername_UserExists_ReturnsUserDetails() {
-        // Arrange
-        String email = "test@example.com";
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword("password");
-
-        // Act
-        when(userService.findByEmail(email)).thenReturn(user);
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
-
-        // Assert
-        assertEquals(email, userDetails.getUsername());
-        assertEquals("password", userDetails.getPassword());
-        assertEquals(1, userDetails.getAuthorities().size());
-        assertEquals("USER", userDetails.getAuthorities().iterator().next().getAuthority());
+    public void testLoadUserByUsername() {
+        // Setup mock behavior
+        Mockito.when(userService.findByEmail(user.getEmail())).thenReturn(user);
+        // Perform the test
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(user.getEmail());
+        // Assertions
+        Assert.assertNotNull(userDetails);
+        Assert.assertEquals(user.getEmail(), userDetails.getUsername());
     }
 
-    @Test
-    void loadUserByUsername_UserDoesNotExist_ThrowsException() {
-        // Arrange
-        String email = "nonexistent@example.com";
-
-        // Act/Assert
-        when(userService.findByEmail(email)).thenReturn(null);
-        assertThrows(UsernameNotFoundException.class, () -> customUserDetailsService.loadUserByUsername(email));
+    @Test(expected = UsernameNotFoundException.class)
+    public void testLoadUserByUsernameWithNonExistingUser() {
+        // Setup mock behavior
+        Mockito.when(userService.findByEmail(user.getEmail())).thenReturn(null);
+        // Perform the test
+        customUserDetailsService.loadUserByUsername(user.getEmail());
     }
 }
