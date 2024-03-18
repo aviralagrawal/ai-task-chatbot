@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function Copyright(props) {
     return (
@@ -43,14 +44,24 @@ const registerUser = (loginDetails) => {
     });
 };
 export default function SignUp() {
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        const loginDetails = {
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
             email: data.get('email'),
             password: data.get('password'),
-        });
-        registerUser({'email': data.get('email'), 'password': data.get('password'), 'firstName' : data.get('firstName'), 'lastName' : data.get('lastName')}).then(response => console.log(response)).catch(error => console.log(error));
+        };
+
+        registerUser(loginDetails)
+            .then(() => {
+                console.log('Registration successful');
+                navigate('/login'); // Redirect to the sign-in page
+            })
+            .catch(error => console.log(error));
     };
 
     return (

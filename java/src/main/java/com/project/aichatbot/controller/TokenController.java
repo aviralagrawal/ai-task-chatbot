@@ -13,11 +13,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * A controller for the token resource.
- *
- * @author Josh Cummings
- */
 @RestController
 public class TokenController {
 
