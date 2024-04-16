@@ -8,7 +8,6 @@ This project is a task management system with an integrated chatbot user interfa
 - **Task Operations:** Supports creating, editing, and deleting tasks through the chatbot interface.
 - **Real-time Updates:** Automatically updates the task list displayed on the dashboard after successful task operations.
 - **JWT Authentication:** Secures user authentication using JSON Web Tokens (JWT).
-- **Responsive Design:** The frontend UI is responsive and can adapt to different screen sizes.
 
 ## Technologies Used
 
